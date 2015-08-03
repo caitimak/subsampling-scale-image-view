@@ -711,38 +711,38 @@ public class SubsamplingScaleImageView extends View {
                         refreshRequiredTiles(false);
 
                         consumed = true;
-                    } else if (!isZooming) {
-                        // One finger pan - translate the image. We do this calculation even with pan disabled so click
-                        // and long click behaviour is preserved.
-                        float dx = Math.abs(event.getX() - vCenterStart.x);
-                        float dy = Math.abs(event.getY() - vCenterStart.y);
-                        if (dx > 5 || dy > 5 || isPanning) {
-                            consumed = true;
-                            vTranslate.x = vTranslateStart.x + (event.getX() - vCenterStart.x);
-                            vTranslate.y = vTranslateStart.y + (event.getY() - vCenterStart.y);
+                    // } else if (!isZooming) {
+                    //     // One finger pan - translate the image. We do this calculation even with pan disabled so click
+                    //     // and long click behaviour is preserved.
+                    //     float dx = Math.abs(event.getX() - vCenterStart.x);
+                    //     float dy = Math.abs(event.getY() - vCenterStart.y);
+                    //     if (dx > 5 || dy > 5 || isPanning) {
+                    //         consumed = true;
+                    //         vTranslate.x = vTranslateStart.x + (event.getX() - vCenterStart.x);
+                    //         vTranslate.y = vTranslateStart.y + (event.getY() - vCenterStart.y);
 
-                            float lastX = vTranslate.x;
-                            float lastY = vTranslate.y;
-                            fitToBounds(true);
-                            boolean atXEdge = lastX != vTranslate.x;
-                            boolean edgeXSwipe = atXEdge && dx > dy && !isPanning;
-                            boolean yPan = lastY == vTranslate.y && dy > 15;
-                            if (!edgeXSwipe && (!atXEdge || yPan || isPanning)) {
-                                isPanning = true;
-                            } else if (dx > 5) {
-                                // Haven't panned the image, and we're at the left or right edge. Switch to page swipe.
-                                maxTouchCount = 0;
-                                handler.removeMessages(MESSAGE_LONG_CLICK);
-                                getParent().requestDisallowInterceptTouchEvent(false);
-                            }
+                    //         float lastX = vTranslate.x;
+                    //         float lastY = vTranslate.y;
+                    //         fitToBounds(true);
+                    //         boolean atXEdge = lastX != vTranslate.x;
+                    //         boolean edgeXSwipe = atXEdge && dx > dy && !isPanning;
+                    //         boolean yPan = lastY == vTranslate.y && dy > 15;
+                    //         if (!edgeXSwipe && (!atXEdge || yPan || isPanning)) {
+                    //             isPanning = true;
+                    //         } else if (dx > 5) {
+                    //             // Haven't panned the image, and we're at the left or right edge. Switch to page swipe.
+                    //             maxTouchCount = 0;
+                    //             handler.removeMessages(MESSAGE_LONG_CLICK);
+                    //             getParent().requestDisallowInterceptTouchEvent(false);
+                    //         }
 
-                            if (!panEnabled) {
-                                vTranslate.x = vTranslateStart.x;
-                                vTranslate.y = vTranslateStart.y;
-                                getParent().requestDisallowInterceptTouchEvent(false);
-                            }
+                    //         if (!panEnabled) {
+                    //             vTranslate.x = vTranslateStart.x;
+                    //             vTranslate.y = vTranslateStart.y;
+                    //             getParent().requestDisallowInterceptTouchEvent(false);
+                    //         }
 
-                            refreshRequiredTiles(false);
+                    //         refreshRequiredTiles(false);
                         }
                     }
                 }
